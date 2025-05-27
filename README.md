@@ -1,107 +1,107 @@
-# Big Data Project with Python, PySpark, and PyFlink
+# Python、PySpark 与 PyFlink 大数据项目
 
-This project is a template for developing big data applications using Python with PySpark and PyFlink.
+本项目是一个使用 Python、PySpark 和 PyFlink 开发大数据应用程序的模板。
 
-## Project Structure
+## 项目结构
 
-- `src/`: Contains all Python source code.
-  - `jobs/`: Houses PySpark and PyFlink job scripts.
-    - `spark/`: PySpark specific jobs.
-    - `flink/`: PyFlink specific jobs.
-  - `utils/`: Common utility functions.
-- `tests/`: Contains unit and integration tests.
-  - `jobs/spark/`: Tests for PySpark jobs.
-  - `jobs/flink/`: Tests for PyFlink jobs.
-- `conf/`: Stores configuration files (e.g., `spark-defaults.conf`, `flink-conf.yaml`).
-- `scripts/`: Includes helper scripts for tasks like running jobs or deployment.
-- `notebooks/`: For Jupyter notebooks used for data exploration and analysis.
-- `requirements.txt`: Lists Python dependencies.
-- `.gitignore`: Specifies intentionally untracked files that Git should ignore.
+- `src/`: 包含所有 Python 源代码。
+  - `jobs/`: 存放 PySpark 和 PyFlink 作业脚本。
+    - `spark/`: PySpark 相关作业。
+    - `flink/`: PyFlink 相关作业。
+  - `utils/`: 通用工具函数。
+- `tests/`: 包含单元测试和集成测试。
+  - `jobs/spark/`: PySpark 作业的测试。
+  - `jobs/flink/`: PyFlink 作业的测试。
+- `conf/`: 存储配置文件（例如 `spark-defaults.conf`, `flink-conf.yaml`）。
+- `scripts/`: 包含辅助脚本，用于运行作业或部署等任务。
+- `notebooks/`: 用于数据探索和分析的 Jupyter Notebook。
+- `requirements.txt`: 列出 Python 依赖项。
+- `.gitignore`: 指定 Git 应忽略的特意未跟踪的文件。
 
-## Setup
+## 安装步骤
 
-1.  **Clone the repository:**
+1.  **克隆代码仓库:**
     ```bash
     git clone <your-repo-url>
     cd <your-repo-name>
     ```
 
-2.  **Create a Python virtual environment:**
-    It's highly recommended to use a virtual environment to manage project dependencies.
+2.  **创建 Python 虚拟环境:**
+    强烈建议使用虚拟环境来管理项目依赖。
     ```bash
     python3 -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  # Windows 系统请使用 `venv\Scripts\activate`
     ```
 
-3.  **Install dependencies:**
+3.  **安装依赖:**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **Environment Variables (Optional but Recommended):**
-    For PySpark and PyFlink to work correctly, you might need `JAVA_HOME` set to your Java installation directory and Spark/Flink home directories if not using them solely as libraries.
+4.  **环境变量 (可选但推荐):**
+    为确保 PySpark 和 PyFlink 正常工作，您可能需要设置 `JAVA_HOME` 指向您的 Java 安装目录，如果不是仅作为库使用它们，还可能需要设置 Spark/Flink 的主目录。
     
-    Ensure Spark and Flink binaries are in your PATH if you plan to use `spark-submit` or `flink` CLI tools directly without full paths.
-    Alternatively, jobs can be run purely via Python execution if cluster managers are not involved or if using embedded modes.
+    如果您计划直接使用 `spark-submit` 或 `flink` 命令行工具（而不是完整路径），请确保 Spark 和 Flink 的二进制文件路径已添加到您的 PATH 环境变量中。
+    或者，如果不涉及集群管理器或使用嵌入式模式，作业也可以纯粹通过 Python 执行。
 
-## Running Jobs
+## 运行作业
 
-You can run the example jobs directly using Python. For more complex deployments or cluster execution, you would typically use `spark-submit` for PySpark jobs and `flink run` for PyFlink jobs.
+您可以直接使用 Python 运行示例作业。对于更复杂的部署或集群执行，通常 PySpark 作业使用 `spark-submit`，PyFlink 作业使用 `flink run`。
 
-### PySpark Example (`word_count.py`)
+### PySpark 示例 (`word_count.py`)
 
-To run the PySpark word count example directly:
+直接运行 PySpark 词频统计示例：
 ```bash
-# Ensure your virtual environment is activated
-# Make sure src/ is accessible by PYTHONPATH
+# 确保您的虚拟环境已激活
+# 确保 src/ 目录在 PYTHONPATH 中以便访问
 export PYTHONPATH=$PYTHONPATH:$(pwd)/src 
 python src/jobs/spark/word_count.py
 ```
-This script runs a self-contained SparkSession. Output will be printed to the console.
+此脚本运行一个独立的 SparkSession。输出将打印到控制台。
 
-For cluster submission (example):
+集群提交 (示例):
 ```bash
 # spark-submit --master <your-spark-master> src/jobs/spark/word_count.py
 ```
 
-### PyFlink Example (`word_count.py`)
+### PyFlink 示例 (`word_count.py`)
 
-To run the PyFlink word count example directly:
+直接运行 PyFlink 词频统计示例：
 ```bash
-# Ensure your virtual environment is activated
-# Make sure src/ is accessible by PYTHONPATH
+# 确保您的虚拟环境已激活
+# 确保 src/ 目录在 PYTHONPATH 中以便访问
 export PYTHONPATH=$PYTHONPATH:$(pwd)/src
 python src/jobs/flink/word_count.py
 ```
-This script runs a self-contained Flink job. Output will be printed to the console.
+此脚本运行一个独立的 Flink 作业。输出将打印到控制台。
 
-For cluster submission (example for a JAR, Python files can also be submitted):
+集群提交 (JAR 包示例, Python 文件也可以提交):
 ```bash
 # flink run -py src/jobs/flink/word_count.py
-# or for a packaged application:
+# 或者对于已打包的应用程序:
 # flink run -c com.example.MainClass your-application.jar
 ```
-*Note: Submitting Python Flink jobs might require packaging or specifying Python files with `-py` or `-pyfs` options depending on your Flink version and setup.*
+*注意: 提交 Python Flink 作业可能需要打包或使用 `-py` 或 `-pyfs` 选项指定 Python 文件，具体取决于您的 Flink 版本和设置。*
 
 
-## Running Tests
+## 运行测试
 
-This project uses `pytest` for running tests.
+本项目使用 `pytest` 进行测试。
 
-1.  **Ensure `pytest` is installed** (it's in `requirements.txt`).
-2.  **Run tests:**
-    From the project root directory:
+1.  **确保 `pytest` 已安装** (它在 `requirements.txt` 文件中)。
+2.  **运行测试:**
+    在项目根目录下执行：
     ```bash
-    # Ensure src is in PYTHONPATH for imports to work
+    # 确保 src 目录在 PYTHONPATH 中以便导入正常工作
     export PYTHONPATH=$(pwd)/src:$PYTHONPATH 
     pytest
     ```
-    This will discover and run all tests in the `tests/` directory.
+    这将发现并运行 `tests/` 目录下的所有测试。
 
-## Configuration
+## 配置
 
--   Spark default configurations can be placed in `conf/spark-defaults.conf`. Copy the template and modify.
--   Flink configurations can be placed in `conf/flink-conf.yaml`. Copy the template and modify.
--   Application-specific configurations can be managed in files like `conf/app.conf`.
+-   Spark 默认配置可以放在 `conf/spark-defaults.conf`。复制模板并修改。
+-   Flink 配置可以放在 `conf/flink-conf.yaml`。复制模板并修改。
+-   应用程序特定的配置可以在类似 `conf/app.conf` 的文件中管理。
 
-These configuration files are typically used when submitting jobs to a cluster or if applications are built to load them explicitly. The provided examples run in local mode and may not extensively use these files without modification.
+这些配置文件通常在向集群提交作业时使用，或者如果应用程序被构建为显式加载它们。提供的示例在本地模式下运行，可能不会广泛使用这些文件而无需修改。
