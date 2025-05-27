@@ -1,0 +1,20 @@
+# Example flink-conf.yaml
+# jobmanager.memory.process.size: 1600m
+# taskmanager.memory.process.size: 1728m
+# taskmanager.numberOfTaskSlots: 2
+# parallelism.default: 2
+
+# Checkpoints
+# state.backend: rocksdb 
+# state.checkpoints.dir: hdfs://your-hdfs-namenode/flink-checkpoints
+# execution.checkpointing.interval: 1min
+
+# High Availability (example using ZooKeeper)
+# high-availability: zookeeper
+# high-availability.storageDir: hdfs:///flink/recovery
+# high-availability.zookeeper.quorum: zk1:2181,zk2:2181,zk3:2181
+# high-availability.zookeeper.path.root: /flink
+
+# Logging (can be configured via log4j properties file)
+# You would typically provide a log4j.properties file and reference it
+# in Flink's startup scripts or job submission.

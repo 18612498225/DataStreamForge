@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-selfcheck.json
+*.egg-info/
+.pytest_cache/
+.hypothesis/
+htmlcov/
+*.coverage
+.tox/
+
+# Big Data / Cluster
+*.log
+logs/
+output/
+target/
+.DS_Store
+*.crc
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*~
+
+# Data files (if you don't want to commit them)
+# data/
+# *.csv
+# *.parquet
+# *.json
+
+# Secrets
+.env
+secrets.yaml
+*.pem

@@ -1,0 +1,15 @@
+; Example application configuration file (INI format)
+[General]
+application_name = MyBigDataApp
+environment = development
+
+[DataSource]
+input_path = /data/input/
+output_path = /data/output/
+
+[SparkSettings]
+# These could override or supplement spark-defaults
+custom_spark_property = value1
+
+[FlinkSettings]
+custom_flink_property = value2
