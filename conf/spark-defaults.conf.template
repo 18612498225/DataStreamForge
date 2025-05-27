@@ -1,0 +1,14 @@
+# Example spark-defaults.conf
+# spark.master                     spark://your-spark-master:7077
+# spark.eventLog.enabled           true
+# spark.eventLog.dir               hdfs://your-hdfs-namenode/spark-logs
+# spark.serializer                 org.apache.spark.serializer.KryoSerializer
+# spark.driver.memory              1g
+# spark.executor.memory            2g
+# spark.executor.cores             1
+# spark.files                      /path/to/custom/log4j.properties 
+# spark.logConf                    true 
+
+# Example for local mode (often defaults are fine, but can be specified)
+# spark.master                     local[*]
+# spark.driver.memory              2g
