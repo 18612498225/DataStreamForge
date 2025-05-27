@@ -29,7 +29,7 @@ target/
 *~
 
 # Data files (if you don't want to commit them)
-# data/
+data/
 # *.csv
 # *.parquet
 # *.json

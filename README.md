@@ -83,6 +83,32 @@ python src/jobs/flink/word_count.py
 ```
 *注意: 提交 Python Flink 作业可能需要打包或使用 `-py` 或 `-pyfs` 选项指定 Python 文件，具体取决于您的 Flink 版本和设置。*
 
+### 电商用户画像示例
+
+本项目包含一个电商用户画像的 Spark 作业示例。该作业处理模拟的用户、产品和订单数据，以生成用户画像，例如总支出、最喜爱的产品类别等。
+
+**1. 生成模拟数据**
+
+画像作业依赖于模拟数据。您可以使用提供的脚本生成这些数据：
+
+```bash
+# 确保您的虚拟环境已激活
+python scripts/generate_mock_data.py
+```
+此脚本会在 `data/mock/` 目录下创建 `users.csv`, `products.csv`, 和 `orders.csv` 文件。
+(注意: `data/` 目录已被添加到 `.gitignore` 中，因此这些模拟数据文件不会被提交到 Git 仓库。)
+
+**2. 运行用户画像 Spark 作业**
+
+生成模拟数据后，您可以运行用户画像 Spark 作业：
+
+```bash
+# 确保您的虚拟环境已激活
+# 确保 src/ 目录在 PYTHONPATH 中
+export PYTHONPATH=$PYTHONPATH:$(pwd)/src
+python src/jobs/spark/user_profiling.py
+```
+此作业将加载 `data/mock/` 中的数据，进行处理，并在控制台打印生成的用户画像信息。画像属性包括用户ID、姓名、年龄、城市、总订单数、总消费金额、平均订单价值、最喜爱的商品类别以及最近下单日期。
 
 ## 运行测试
 
